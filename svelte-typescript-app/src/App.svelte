@@ -1,25 +1,50 @@
 <script lang="ts">
-	export let name: string;
+  import Page from "./Page.svelte";
+  import LanguageSwitch from "./LanguageSwitch.svelte";
+  import ScrollingBG from "./ScrollingBG.svelte";
+  import Title from "./Title.svelte";
+  import ShowCase from "./ShowCase.svelte";
+  import PlayGround from "./PlayGround.svelte";
+
+  let language:number = 0;
+
+  function handleLang(l:number){
+    language = l
+  }
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <ScrollingBG/>
+  <LanguageSwitch languageHandler={handleLang}/>
+  <Page>
+    <Title language={language}/>
+  </Page>
+  <Page>
+    <ShowCase/>
+  </Page>
+  <Page>
+    <PlayGround language={language}/>
+  </Page>
 </main>
 
 <style>
+  :global(body, html){
+    margin: 0;
+    padding: 0;
+  }    
+  :global(:root){
+    --bg: #012;
+    --bg2: #124;
+    --bg3: #335;
+    --secondary: rgb(49, 95, 95);
+    --secondary2: #4a9;
+    --text: #bcc;
+    --highlight: #eef;
+  }
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--text);
 	}
 
 	@media (min-width: 640px) {
